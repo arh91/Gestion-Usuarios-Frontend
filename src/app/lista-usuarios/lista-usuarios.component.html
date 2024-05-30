@@ -1,0 +1,9 @@
+<div>
+    <h2>Lista de Usuarios</h2>
+    <ul>
+      <li *ngFor="let usuario of usuarios" (click)="verDatosUsuario(usuario.nick)">
+        {{ usuario.nick }}
+      </li>
+    </ul>
+  </div>
+  

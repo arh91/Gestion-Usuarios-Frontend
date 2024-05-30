@@ -1,0 +1,12 @@
+  <div *ngIf="usuario">
+    <h2>Datos del Usuario: {{ usuario.nick }}</h2>
+    <p>Nombre: {{ usuario.nick }}</p>
+    <p>Email: {{ usuario.mail }}</p>
+    <p>Teléfono: {{ usuario.telefono }}</p>
+    <p>Estado: {{ usuario.conectado ? 'Conectado' : 'No conectado' }}</p>
+    <!-- Muestra otros datos del usuario según tu modelo -->
+  </div>
+  <div *ngIf="!usuario">
+    <p>Cargando datos del usuario...</p>
+  </div>
+  
