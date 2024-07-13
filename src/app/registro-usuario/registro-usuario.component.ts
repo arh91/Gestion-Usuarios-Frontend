@@ -47,16 +47,25 @@ export class RegistroUsuarioComponent implements OnInit {
       this.marcarTodosLosCamposComoTocados();
       return;
     }    
+
+    this.usuario.nick = this.registroForm.get('nick')?.value;
+    this.usuario.password = this.registroForm.get('password')?.value;
+    this.usuario.mail = this.registroForm.get('mail')?.value;
+    this.usuario.telefono = this.registroForm.get('telefono')?.value;
+    this.usuario.conectado = false;
+
     if(this.comprobarLongitudCadena(this.usuario.nick)){
       alert("El nick no debe contener más de 50 caracteres");
       return;
     }
+    console.log(this.usuario);
     this.usuarioService.registrarUsuario(this.usuario).subscribe(
       (response) => {
         // Maneja la respuesta del servidor
         console.log('Usuario registrado:', response);
         alert("Usuario registrado correctamente");
         // Limpia el formulario después de registrar el usuario
+        this.registroForm.reset();
         this.usuario = new Usuario();
       },
       (error) => {
