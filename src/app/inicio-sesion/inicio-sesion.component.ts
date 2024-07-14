@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Usuario } from '../../models/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { ChangeDetectorRef } from '@angular/core';
@@ -12,27 +13,42 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class InicioSesionComponent {
   usuario: Usuario = new Usuario();
-  registroForm: FormGroup; 
+  loginForm: FormGroup; 
   passwordFieldType: string = "password";
 
-  constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private cdRef: ChangeDetectorRef) {
-    this.registroForm = new FormGroup({});
+  constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private cdRef: ChangeDetectorRef, private router: Router) {
+    this.loginForm = new FormGroup({});
   }
 
   ngOnInit(): void {
     // Crear el formulario en el método ngOnInit()
-    this.registroForm = this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       nick: ['', Validators.required],
       password: ['', Validators.required]
     });
+    /* this.usuario.nick = this.loginForm.get('nick')?.value;
+    this.usuario.password = this.loginForm.get('password')?.value; */
   }
 
   iniciarSesion(): void {
-    if (this.registroForm.invalid) {
+    if (this.loginForm.invalid) {
       alert('Por favor, rellene todos los campos.');
       this.marcarTodosLosCamposComoTocados();
       return;
     }
+    this.usuarioService.autenticarUsuario(this.loginForm.value).subscribe(
+      (response) => {
+        // Maneja la respuesta del servidor
+        console.log('Usuario autenticado:', response);
+        alert("Inicio de sesión exitoso");
+        this.router.navigate(['/sesion-iniciada']); // Redirige a la página principal u otra página de tu aplicación
+      },
+      (error) => {
+        // Maneja errores de la solicitud
+        console.error('Error al iniciar sesión:', error);
+        alert("Usuario o contraseña incorrectos");
+      }
+    );
   }
 
   cambiarVisibilidadContrasenha(): void {
@@ -43,8 +59,8 @@ export class InicioSesionComponent {
   }
 
   marcarTodosLosCamposComoTocados(): void {
-    Object.keys(this.registroForm.controls).forEach(field => {
-      const control = this.registroForm.get(field);
+    Object.keys(this.loginForm.controls).forEach(field => {
+      const control = this.loginForm.get(field);
       control?.markAsTouched({ onlySelf: true });
     });
   }

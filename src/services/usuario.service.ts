@@ -16,6 +16,11 @@ export class UsuarioService {
     return this.http.post<Usuario>(`${this.apiUrl}/registro`, usuario);
   }
 
+  // Método para autenticar un usuario
+  autenticarUsuario(usuario: Usuario): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.apiUrl}/autenticar`, usuario);
+  }
+
   // Método para obtener todos los usuarios desde el backend
   listarUsuarios(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(`${this.apiUrl}/lista`);

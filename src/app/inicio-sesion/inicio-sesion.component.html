@@ -1,4 +1,4 @@
-<form [formGroup]="registroForm" (ngSubmit)="iniciarSesion()">
+<form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
     <div>
       <h2>Inicio de sesión</h2>
     </div>
@@ -6,7 +6,7 @@
       <label for="nick">Nickname:</label>
       <input type="text" id="nick" name="nick" formControlName="nick" required>
       <!-- Muestra un mensaje de error si el campo nick está vacío -->
-      <div *ngIf="registroForm.get('nick')?.invalid && registroForm.get('nick')?.touched">
+      <div *ngIf="loginForm.get('nick')?.invalid && loginForm.get('nick')?.touched">
         Introduzca un nick de usuario.
       </div>
     </div>
@@ -17,7 +17,7 @@
         {{passwordFieldType === "password" ? "Ver" : "Ocultar"}}
       </button>
       <!-- Muestra un mensaje de error si el campo contraseña está vacío -->
-      <div *ngIf="registroForm.get('password')?.invalid && registroForm.get('password')?.touched">
+      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
         Introduzca una contraseña.
       </div>
     </div>
