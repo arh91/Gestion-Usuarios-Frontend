@@ -41,6 +41,7 @@ export class InicioSesionComponent {
         // Maneja la respuesta del servidor
         console.log('Usuario autenticado:', response);
         alert("Inicio de sesión exitoso");
+        localStorage.setItem('nickUsuario', this.loginForm.get('nick')?.value); //Guardamos el nick en almacenamiento local
         this.router.navigate(['/sesion-iniciada']); // Redirige a la página principal u otra página de tu aplicación
       },
       (error) => {

@@ -1,5 +1,6 @@
-<div>
-    <h2>BIENVENIDO</h2>
+<div *ngIf="nick">
+    <h1>Bienvenido {{ nick }}</h1>
+    <button type="button" (click)="cerrarSesion()">Cerrar Sesión</button>
 </div>
-<br><br>
-<button type="button" routerLink="/inicio-sesion">Cerrar Sesión</button>
+<!-- <button type="button" (click)="cerrarSesion()">Cerrar Sesión</button> -->
+
