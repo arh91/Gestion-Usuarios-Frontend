@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { 
+    height: 100%; 
+}
+
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-color: #93FF33;
+}
+
+button{
+    width: 100px;
+    height: 30px;
+    margin-top: 30px;
+    background-color: #A7E5D9;
+}
+
+input{
+    width: 250px; 
+}
+
+.header {
+    text-align: center;
+}
