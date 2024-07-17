@@ -1,0 +1,19 @@
+.users-list{
+    margin-top: 60px;
+}
+
+.users-list ul {
+    padding: 0; /* Elimina padding por defecto */
+    list-style-position: inside; /* Asegura que los bullets estén dentro del contenedor ul */
+    text-align: center; /* Centra el texto dentro del ul */
+}
+
+.users-list ul li{
+    margin-bottom: 20px;
+}
+
+.button-container{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}

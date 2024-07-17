@@ -28,4 +28,8 @@ export class ListaUsuariosComponent implements OnInit{
     this.router.navigate(['/datos-usuario', nick]);
   }
 
+  volverInicio(): void{
+    this.router.navigate(['']);
+  }
+
 }

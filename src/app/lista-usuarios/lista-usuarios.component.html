@@ -1,9 +1,14 @@
 <div class="header">
     <h2>Lista de Usuarios</h2>
+</div>
+<div class="users-list">
     <ul>
       <li *ngFor="let usuario of usuarios" (click)="verDatosUsuario(usuario.nick)">
         {{ usuario.nick }}
       </li>
     </ul>
-  </div>
+</div>
+<div class="button-container">
+  <button type="text" (click)="volverInicio()">Atrás</button>
+</div>
   

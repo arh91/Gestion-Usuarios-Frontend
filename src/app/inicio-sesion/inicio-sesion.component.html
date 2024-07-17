@@ -2,26 +2,30 @@
     <div class="header">
       <h2>Inicio de sesión</h2>
     </div>
-    <div>
-      <label for="nick">Nickname:</label>
-      <input type="text" id="nick" name="nick" formControlName="nick" required>
-      <!-- Muestra un mensaje de error si el campo nick está vacío -->
-      <div *ngIf="loginForm.get('nick')?.invalid && loginForm.get('nick')?.touched">
-        Introduzca un nick de usuario.
+    <div class="form-container">
+      <div id="input-container">
+        <label for="nick">Nickname:</label>
+        <input type="text" id="nick" name="nick" formControlName="nick" required>
+        <!-- Muestra un mensaje de error si el campo nick está vacío -->
+        <div *ngIf="loginForm.get('nick')?.invalid && loginForm.get('nick')?.touched">
+          Introduzca un nick de usuario.
+        </div>
+      </div>
+      <div id="input-container">
+        <label for="password">Contraseña:</label>
+        <input [type]="passwordFieldType" id="password" name="password" formControlName="password" required>
+        <button type="button" (click)="cambiarVisibilidadContrasenha()" style="margin-left: 10px;">
+          {{passwordFieldType === "password" ? "Ver" : "Ocultar"}}
+        </button>
+        <!-- Muestra un mensaje de error si el campo contraseña está vacío -->
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          Introduzca una contraseña.
+        </div>
       </div>
     </div>
-    <div>
-      <label for="password">Contraseña:</label>
-      <input [type]="passwordFieldType" id="password" name="password" formControlName="password" required style="flex-grow: 1;">
-      <button type="button" (click)="cambiarVisibilidadContrasenha()" style="margin-left: 10px;">
-        {{passwordFieldType === "password" ? "Ver" : "Ocultar"}}
-      </button>
-      <!-- Muestra un mensaje de error si el campo contraseña está vacío -->
-      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-        Introduzca una contraseña.
-      </div>
+    <div class="button-container">
+      <button type="submit">Iniciar sesión</button><br>
+      <button routerLink="">Atrás</button>
     </div>
-    <button type="submit">Iniciar sesión</button><br>
-    <button routerLink="">Atrás</button>
 </form>
 

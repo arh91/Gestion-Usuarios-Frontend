@@ -15,7 +15,7 @@
       <div id="input-container">
         <label for="password">Contraseña:</label>
         <input [type]="passwordFieldType" id="password" name="password" formControlName="password" required>
-        <button type="button" (click)="cambiarVisibilidadContrasenha()" id="vista" name="vista" style="margin-left: 10px;">
+        <button type="button" (click)="cambiarVisibilidadContrasenha()" id="vista" name="vista">
           {{passwordFieldType === "password" ? "Ver" : "Ocultar"}}
         </button>
         <!-- Muestra un mensaje de error si el campo contraseña está vacío -->
