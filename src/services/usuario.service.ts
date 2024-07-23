@@ -17,10 +17,6 @@ export class UsuarioService {
   }
 
   // Método para autenticar un usuario
-  /*autenticarUsuario(usuario: Usuario): Observable<Usuario> {
-    return this.http.post<Usuario>(`${this.apiUrl}/autenticar`, usuario);
-  }*/
-
   autenticarUsuario(nick: string, password: string): Observable<Usuario> {
     const params = new HttpParams().set('nick', nick).set('contraseña', password);
     return this.http.post<Usuario>(`${this.apiUrl}/autenticar`, params);

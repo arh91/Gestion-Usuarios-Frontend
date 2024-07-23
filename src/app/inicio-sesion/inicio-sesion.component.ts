@@ -14,7 +14,6 @@ import { ChangeDetectorRef } from '@angular/core';
 export class InicioSesionComponent {
   nick: string = '';
   password: string = '';
-  //usuario: Usuario = new Usuario();
   loginForm: FormGroup; 
   passwordFieldType: string = "password";
 
@@ -52,20 +51,6 @@ export class InicioSesionComponent {
         alert('Error al iniciar sesión');
       }
     );
-    /*this.usuarioService.autenticarUsuario(this.loginForm.value).subscribe(
-      (response) => {
-        // Maneja la respuesta del servidor
-        console.log('Usuario autenticado:', response);
-        alert("Inicio de sesión exitoso");
-        localStorage.setItem('nickUsuario', this.loginForm.get('nick')?.value); //Guardamos el nick en almacenamiento local
-        this.router.navigate(['/sesion-iniciada']); // Redirige a la página principal u otra página de tu aplicación
-      },
-      (error) => {
-        // Maneja errores de la solicitud
-        console.error('Error al iniciar sesión:', error);
-        alert("Usuario o contraseña incorrectos");
-      }
-    );*/
   }
 
   cambiarVisibilidadContrasenha(): void {

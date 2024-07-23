@@ -13,7 +13,6 @@
   .button-container{
     display: flex;
     justify-content: center; /* Centra horizontalmente */
-    /*align-items: center;    /* Centra verticalmente */
   }
 
   .button-container #btnAtras{

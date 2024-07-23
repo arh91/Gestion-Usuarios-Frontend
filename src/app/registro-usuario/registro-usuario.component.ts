@@ -19,16 +19,6 @@ export class RegistroUsuarioComponent implements OnInit {
     this.registroForm = new FormGroup({});
   }
 
-  /*constructor(private formBuilder: FormBuilder) {
-    this.registroForm = this.formBuilder.group({
-      nombre: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      marca: ['', Validators.required],
-      precio: ['', Validators.required],
-      categoria: ['', Validators.required]
-    });
-  }*/
-
   ngOnInit(): void {
     // Crear el formulario en el método ngOnInit()
     this.registroForm = this.formBuilder.group({

@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrl: './sesion-iniciada.component.css'
 })
 export class SesionIniciadaComponent {
-  //nick: string | null = '';
+  
   nick: string | null = null;
 
   constructor(private usuarioService: UsuarioService, private router: Router) {}
