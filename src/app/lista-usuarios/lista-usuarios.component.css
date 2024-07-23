@@ -8,9 +8,15 @@
     text-align: center; /* Centra el texto dentro del ul */
 }
 
-.users-list ul li{
+.users-list li{
+    padding: 8px;
+    cursor: pointer;
     margin-bottom: 20px;
 }
+
+/*.users-list li:hover {
+    background-color: #f0f0f0;
+}*/
 
 .button-container{
     position: fixed;

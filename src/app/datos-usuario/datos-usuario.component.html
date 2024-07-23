@@ -1,0 +1,41 @@
+<div *ngIf="usuario">
+    <div class="header">
+      <h1>Datos de perfil</h1>
+    </div>
+    
+    <div class="form-container">
+
+      <p>Nickname:   {{usuario.nick}}</p>
+      <p>Email:      {{usuario.mail}}</p>
+      <p>Fecha de registro:     {{formatearFecha(usuario.fechaRegistro)}}</p>
+      <p>Estado:     {{estadoUsuario}}</p>
+  
+      <!-- <div id="input-container">
+        <label for="nick">Nick:</label>
+        <input id="nick" type="text" [ngModel]="usuario.nick" readonly>
+      </div>
+  
+      <div id="input-container">
+        <label for="mail">Mail:</label>
+        <input id="mail" type="text" [value]="usuario.mail" readonly>
+      </div>
+  
+      <div id="input-container">
+        <label for="fechaRegistro">Fecha de registro:</label>
+        <input id="fechaRegistro" type="text" [value]="formatearFecha(usuario.fechaRegistro)" readonly>
+      </div>
+  
+      <div id="input-container">
+        <label for="estado">Estado:</label>
+        <input id="estado" [value]="estadoUsuario" readonly><br>
+      </div> -->
+  
+    </div>
+  
+    <div class="button-container">
+      <button id="btnAtras" routerLink='/lista-usuarios'>Atrás</button>
+    </div>
+  
+    
+  </div>
+  

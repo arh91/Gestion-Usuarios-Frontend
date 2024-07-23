@@ -12,7 +12,9 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrl: './inicio-sesion.component.css'
 })
 export class InicioSesionComponent {
-  usuario: Usuario = new Usuario();
+  nick: string = '';
+  password: string = '';
+  //usuario: Usuario = new Usuario();
   loginForm: FormGroup; 
   passwordFieldType: string = "password";
 
@@ -26,17 +28,31 @@ export class InicioSesionComponent {
       nick: ['', Validators.required],
       password: ['', Validators.required]
     });
-    /* this.usuario.nick = this.loginForm.get('nick')?.value;
-    this.usuario.password = this.loginForm.get('password')?.value; */
   }
 
   iniciarSesion(): void {
+    this.nick = this.loginForm.get('nick')?.value;
+    this.password = this.loginForm.get('password')?.value;
+
     if (this.loginForm.invalid) {
       alert('Por favor, rellene todos los campos.');
       this.marcarTodosLosCamposComoTocados();
       return;
     }
-    this.usuarioService.autenticarUsuario(this.loginForm.value).subscribe(
+    this.usuarioService.autenticarUsuario(this.nick, this.password).subscribe(
+      usuario => {
+        if (usuario) {
+          localStorage.setItem('nickUsuario', usuario.nick);
+          this.router.navigate(['/sesion-iniciada']);
+        } else {
+          alert('Credenciales incorrectas');
+        }
+      },
+      error => {
+        alert('Error al iniciar sesión');
+      }
+    );
+    /*this.usuarioService.autenticarUsuario(this.loginForm.value).subscribe(
       (response) => {
         // Maneja la respuesta del servidor
         console.log('Usuario autenticado:', response);
@@ -49,7 +65,7 @@ export class InicioSesionComponent {
         console.error('Error al iniciar sesión:', error);
         alert("Usuario o contraseña incorrectos");
       }
-    );
+    );*/
   }
 
   cambiarVisibilidadContrasenha(): void {

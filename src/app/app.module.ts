@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { SesionIniciadaComponent } from './sesion-iniciada/sesion-iniciada.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
+import { DatosUsuarioComponent } from './datos-usuario/datos-usuario.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.componen
     RegistroUsuarioComponent,
     InicioSesionComponent,
     SesionIniciadaComponent,
-    ListaUsuariosComponent
+    ListaUsuariosComponent,
+    DatosUsuarioComponent
   ],
   imports: [
     BrowserModule,

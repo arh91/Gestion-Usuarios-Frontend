@@ -1,0 +1,25 @@
+  .header{
+    margin-bottom:50px;
+  }
+
+  .form-container{
+    margin-bottom: 25%;
+  }
+
+  .form-container p{
+    margin-left: 45%;
+  }
+
+  .button-container{
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    /*align-items: center;    /* Centra verticalmente */
+  }
+
+  .button-container #btnAtras{
+    bottom: 60px;
+  }
+
+
+
+  

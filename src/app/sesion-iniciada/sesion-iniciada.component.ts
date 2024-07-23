@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
   styleUrl: './sesion-iniciada.component.css'
 })
 export class SesionIniciadaComponent {
-  nick: string | null = '';
+  //nick: string | null = '';
+  nick: string | null = null;
 
   constructor(private usuarioService: UsuarioService, private router: Router) {}
 
@@ -18,7 +19,18 @@ export class SesionIniciadaComponent {
   }
 
   cerrarSesion() {
-    localStorage.removeItem('nickUsuario');
-    this.router.navigate(['/inicio-sesion']);
+    this.ngOnInit();
+    console.log(this.nick);
+    if (this.nick) {
+      this.usuarioService.cerrarSesion(this.nick).subscribe(() => {
+        localStorage.removeItem('nickUsuario');
+        this.router.navigate(['/inicio-sesion']);
+      });
+    }
   }
+
+  mostrarListaUsuarios(){
+    this.router.navigate(['/lista-usuarios']);
+  }
+
 }

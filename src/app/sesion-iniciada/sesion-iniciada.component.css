@@ -2,3 +2,9 @@
     position: fixed;
     bottom: 60px;
 }
+
+.header #btnListaUsuarios{
+    position: fixed;
+    top: 40px;
+    right: 40px;
+}

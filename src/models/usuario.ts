@@ -1,16 +1,20 @@
 export class Usuario {
     nick: string;
-    password: string;
+    password?: string;
     mail: string
     telefono: number;
+    fechaRegistro: Date;
     conectado: boolean;
   
-    constructor() {
-      // Inicializa las propiedades por defecto si es necesario
-      this.nick = '';
-      this.password = '';
-      this.mail = '';
-      this.telefono = 0;
-      this.conectado = false;
+
+    constructor(nick: string = '', password?: string, mail: string = '', telefono: number = 0, fechaRegistro: Date = new Date(),
+      conectado: boolean = false) {
+      this.nick = nick;
+      this.password = password;
+      this.mail = mail;
+      this.telefono = telefono;
+      this.fechaRegistro = fechaRegistro;
+      this.conectado = conectado;
     }
+
   }
