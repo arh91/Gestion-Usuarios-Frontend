@@ -21,6 +21,11 @@ export class UsuarioService {
     const params = new HttpParams().set('nick', nick).set('contraseña', password);
     return this.http.post<Usuario>(`${this.apiUrl}/autenticar`, params);
   }
+
+  // Método que comprueba que el nick introducido no exista aún en la base de datos
+  validarNick(nick: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/validarNick/${nick}`);
+  }
   
   cerrarSesion(nick: string): Observable<void> {
     const params = new HttpParams().set('nick', nick);

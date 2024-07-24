@@ -14,6 +14,7 @@ export class RegistroUsuarioComponent implements OnInit {
   usuario: Usuario = new Usuario();
   registroForm: FormGroup; 
   passwordFieldType: string = "password";
+  nickExists: boolean = false;
 
   constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private cdRef: ChangeDetectorRef) {
     this.registroForm = new FormGroup({});
@@ -48,22 +49,32 @@ export class RegistroUsuarioComponent implements OnInit {
       alert("El nick no debe contener más de 50 caracteres");
       return;
     }
-    console.log(this.usuario);
-    this.usuarioService.registrarUsuario(this.usuario).subscribe(
-      (response) => {
-        // Maneja la respuesta del servidor
-        console.log('Usuario registrado:', response);
-        alert("Usuario registrado correctamente");
-        // Limpia el formulario después de registrar el usuario
-        this.registroForm.reset();
-        this.usuario = new Usuario();
-      },
-      (error) => {
-        // Maneja errores de la solicitud
-        console.error('Error al registrar usuario:', error);
-        alert("Error al registrar usuario");
-      }
-    );
+    this.usuarioService.validarNick(this.usuario.nick).subscribe(exists => {
+      if (exists) {
+        alert('El nick ya existe. Por favor, elige otro.');
+        return;
+      } 
+    
+      console.log(this.usuario);
+      this.usuarioService.registrarUsuario(this.usuario).subscribe(
+        (response) => {
+          // Maneja la respuesta del servidor
+          console.log('Usuario registrado:', response);
+          alert("Usuario registrado correctamente");
+          // Limpia el formulario después de registrar el usuario
+          this.registroForm.reset();
+          this.usuario = new Usuario();
+        },
+        (error) => {
+          // Maneja errores de la solicitud
+          console.error('Error al registrar usuario:', error);
+          alert("Error al registrar usuario");
+        }
+      );
+    }, error => {
+      // Manejar errores de validación de nick
+      console.error('Error al validar nick:', error);
+    });
   }
 
   cambiarVisibilidadContrasenha(): void {
