@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { UsuarioService } from './usuario.service'; // Asegúrate de importar tu servicio de usuario
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class InactivityService {
   private timeoutId: any;
-  private readonly inactivityTimeLimit = 3 * 60 * 1000; // 3 minutos
+  private readonly inactivityTimeLimit = 5 * 60 * 1000; // tiempo límite de 5 minutos
 
-  constructor(private router: Router, private usuarioService: UsuarioService) {
+  constructor(private router: Router) {
   }
 
 
@@ -73,7 +73,7 @@ export class InactivityService {
     this.stopMonitoring();
     localStorage.setItem('usuarioInactivo', 'true');  // Marcar el usuario como desconectado por inactividad en localStorage
     this.router.navigate(['/inicio-sesion']); // Redirige a la página de inicio de sesión
-    alert('Has sido desconectado por inactividad.');
+    alert('Sesión cerrada por superar límite de tiempo inactivo. Vuelva a iniciar sesión si así lo desea.');
   }
 
 }
