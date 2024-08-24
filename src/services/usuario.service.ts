@@ -53,9 +53,4 @@ export class UsuarioService {
     return this.http.put<Usuario>(`${this.apiUrl}/${id}`, usuarioModificado);
   }
 
-  cerrarSesionInactiva() {
-    localStorage.removeItem('nickUsuario');
-    this.router.navigate(['/inicio-sesion']); // Redirige al usuario a la página de inicio de sesión
-  }
-
 }

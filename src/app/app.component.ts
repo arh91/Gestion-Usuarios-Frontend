@@ -34,9 +34,5 @@ export class AppComponent implements OnInit{
       // Redirigir al inicio de sesión
       this.router.navigate(['/inicio-sesion']);
     }
-    /*if (!nickUsuario) {
-      // Si no hay un usuario en el localStorage, redirige a la página de inicio de sesión.
-      this.router.navigate(['/inicio-sesion']);
-    }*/
   }
 }

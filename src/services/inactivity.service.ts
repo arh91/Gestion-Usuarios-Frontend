@@ -41,15 +41,7 @@ export class InactivityService {
     window.removeEventListener('scroll', this.resetTimer.bind(this));
   }
 
-  /*startMonitoring() {
-    this.resetTimer();
-
-    ['click', 'mousemove', 'keydown', 'scroll'].forEach(event => {
-      document.addEventListener(event, () => this.resetTimer());
-    });
-  }*/
-
-
+  
   /**
    * Resetea el temporizador de inactividad.
    * Se llama cada vez que se detecta actividad del usuario. Si no se detecta actividad dentro del tiempo límite, se cierra la sesión.
@@ -58,11 +50,6 @@ export class InactivityService {
     this.clearTimeout();
     this.timeoutId = setTimeout(() => this.logoutUser(), this.inactivityTimeLimit);
   }
-  
-  /*resetTimer() {
-    clearTimeout(this.timeoutId);
-    this.timeoutId = setTimeout(() => this.logout(), this.timeoutDuration);
-  }*/
 
 
     /**
@@ -89,10 +76,4 @@ export class InactivityService {
     alert('Has sido desconectado por inactividad.');
   }
 
-
-  logout() {
-    this.usuarioService.cerrarSesionInactiva(); // Llama al método de cerrar sesión en tu servicio de usuario
-    this.router.navigate(['/inicio-sesion']); // Redirige a la página de inicio de sesión
-    alert('Sesión cerrada por inactividad.');
-  }
 }
