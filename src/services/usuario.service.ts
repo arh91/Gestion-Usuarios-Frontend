@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Usuario } from '../models/usuario';
 export class UsuarioService {
   private apiUrl = 'http://localhost:8081/usuarios'; // URL del backend que proporciona la API REST para usuarios
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   // Método para crear un nuevo usuario en el backend
   registrarUsuario(usuario: Usuario): Observable<Usuario> {
@@ -50,6 +51,11 @@ export class UsuarioService {
   // Método para modificar un usuario por su ID
   modificarUsuario(id: string, usuarioModificado: Usuario): Observable<Usuario> {
     return this.http.put<Usuario>(`${this.apiUrl}/${id}`, usuarioModificado);
+  }
+
+  cerrarSesionInactiva() {
+    localStorage.removeItem('nickUsuario');
+    this.router.navigate(['/inicio-sesion']); // Redirige al usuario a la página de inicio de sesión
   }
 
 }

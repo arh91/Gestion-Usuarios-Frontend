@@ -11,6 +11,7 @@ import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { SesionIniciadaComponent } from './sesion-iniciada/sesion-iniciada.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 import { DatosUsuarioComponent } from './datos-usuario/datos-usuario.component';
+import { InactivityService } from '../services/inactivity.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { DatosUsuarioComponent } from './datos-usuario/datos-usuario.component';
     AppRoutingModule,
     RouterModule
   ],
-  providers: [UsuarioService],
+  providers: [UsuarioService, InactivityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Usuario } from '../../models/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { InactivityService } from '../../services/inactivity.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class InicioSesionComponent {
   loginForm: FormGroup; 
   passwordFieldType: string = "password";
 
-  constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private cdRef: ChangeDetectorRef, private router: Router) {
+  constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private cdRef: ChangeDetectorRef, private router: Router, private inactivityService: InactivityService) {
     this.loginForm = new FormGroup({});
   }
 
@@ -42,6 +43,7 @@ export class InicioSesionComponent {
       usuario => {
         if (usuario) {
           localStorage.setItem('nickUsuario', usuario.nick);
+          this.inactivityService.startMonitoring(); // La app inicia el monitoreo de inactividad
           this.router.navigate(['/sesion-iniciada']);
         } else {
           alert('Credenciales incorrectas');
