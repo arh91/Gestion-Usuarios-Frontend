@@ -8,10 +8,11 @@
         <label for="nick">Nickname:</label>
         <input type="text" id="nick" name="nick" formControlName="nick" required>
         <!-- Muestra un mensaje de error si el campo nick está vacío -->
-        <div *ngIf="registroForm.get('nick')?.invalid && registroForm.get('nick')?.touched">
+        <!-- <div *ngIf="registroForm.get('nick')?.invalid && registroForm.get('nick')?.touched">
           Introduzca un nick de usuario.
-        </div>
+        </div> -->
       </div>
+
       <div id="input-container">
         <label for="password">Contraseña:</label>
         <input [type]="passwordFieldType" id="password" name="password" formControlName="password" required>
@@ -19,10 +20,11 @@
           {{passwordFieldType === "password" ? "Ver" : "Ocultar"}}
         </button>
         <!-- Muestra un mensaje de error si el campo contraseña está vacío -->
-        <div *ngIf="registroForm.get('password')?.invalid && registroForm.get('password')?.touched">
+        <!-- <div *ngIf="registroForm.get('password')?.invalid && registroForm.get('password')?.touched">
           Introduzca una contraseña.
-        </div>
+        </div> -->
         <div *ngIf="registroForm.get('password')?.errors && registroForm.get('password')?.touched">
+          <p>La contraseña debe tener:</p>
           <div *ngIf="registroForm.get('password')?.errors?.['minLength']">
             {{ registroForm.get('password')?.errors?.['minLength'] }}
           </div>
@@ -46,17 +48,18 @@
         <label for="mail">Mail:</label>
         <input type="text" id="mail" name="mail" formControlName="mail" required>
         <!-- Muestra un mensaje de error si el campo mail está vacío -->
-        <div *ngIf="registroForm.get('mail')?.invalid && registroForm.get('mail')?.touched">
+        <!-- <div *ngIf="registroForm.get('mail')?.invalid && registroForm.get('mail')?.touched">
           Introduzca una dirección de correo.
-        </div>
+        </div> -->
       </div>
+
       <div id="input-container">
         <label for="telefono">Teléfono:</label>
         <input type="number" id="telefono" name="telefono" formControlName="telefono" required>
         <!-- Muestra un mensaje de error si el campo telefono está vacío -->
-        <div *ngIf="registroForm.get('telefono')?.invalid && registroForm.get('telefono')?.touched">
+        <!-- <div *ngIf="registroForm.get('telefono')?.invalid && registroForm.get('telefono')?.touched">
           Introduzca un número de teléfono.
-        </div>
+        </div> -->
       </div>
     </div>
 

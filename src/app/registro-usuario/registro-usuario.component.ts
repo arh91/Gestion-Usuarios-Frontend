@@ -15,6 +15,7 @@ export class RegistroUsuarioComponent implements OnInit {
   registroForm: FormGroup; 
   passwordFieldType: string = "password";
   nickExists: boolean = false;
+  requisitosCumplidos: boolean = false;
 
   constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private cdRef: ChangeDetectorRef) {
     this.registroForm = new FormGroup({});
@@ -24,7 +25,7 @@ export class RegistroUsuarioComponent implements OnInit {
     // Crear el formulario en el método ngOnInit()
     this.registroForm = this.formBuilder.group({
       nick: ['', Validators.required],
-      password: ['', Validators.required, Validators.minLength(8), this.validarContrasenha],
+      password: ['', [Validators.required, Validators.minLength(8), this.validarContrasenha]],
       mail: ['', Validators.required],
       telefono: ['', Validators.required]
     });
@@ -49,12 +50,16 @@ export class RegistroUsuarioComponent implements OnInit {
       alert("El nick no debe contener más de 50 caracteres");
       return;
     }
+    /*this.validarContrasenha(this.usuario.password);
+    if (!this.requisitosCumplidos){
+      alert('La contraseña introducida no es válida');
+      return;
+    }*/
     this.usuarioService.validarNick(this.usuario.nick).subscribe(exists => {
       if (exists) {
         alert('El nick ya existe. Por favor, elige otro.');
         return;
       } 
-    
       console.log(this.usuario);
       this.usuarioService.registrarUsuario(this.usuario).subscribe(
         (response) => {
@@ -83,19 +88,19 @@ export class RegistroUsuarioComponent implements OnInit {
     const errors: any = {};
 
     if (password.length < 8) {
-      errors.minLength = 'La contraseña debe tener al menos 8 caracteres.';
+      errors.minLength = '- Como mínimo 8 caracteres,';
     }
     if (!/[A-Z]/.test(password)) {
-      errors.mayuscula = 'Debe tener al menos una letra mayúscula.';
+      errors.mayuscula = '- Una letra mayúscula.';
     }
     if (!/[a-z]/.test(password)) {
-      errors.minuscula = 'Debe tener al menos una letra minúscula.';
+      errors.minuscula = '- Una letra minúscula.';
     }
     if (!/\d.*\d/.test(password)) {
-      errors.dosNumeros = 'Debe tener al menos dos números.';
+      errors.dosNumeros = '- Al menos dos números.';
     }
     if (!/[@$!%*?&#]/.test(password)) {
-      errors.caracterEspecial = 'Debe tener al menos un carácter especial.';
+      errors.caracterEspecial = '- Al menos un carácter especial.';
     }
 
     return Object.keys(errors).length ? errors : null;
