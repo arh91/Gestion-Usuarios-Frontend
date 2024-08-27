@@ -1,9 +1,26 @@
-.header #btnCerrarSesion{
+.body #btnCerrarSesion{
     position: fixed;
     bottom: 60px;
+    right: 40px;
 }
 
-.header #btnListaUsuarios{
+.body p{
+    margin-left: 45%;
+}
+
+.body #btnEliminar{
+    position: fixed;
+    top: 140px;
+    right: 40px;
+}
+
+.body #btnModificar{
+    position: fixed;
+    top: 240px;
+    right: 40px;
+}
+
+.body #btnListaUsuarios{
     position: fixed;
     top: 40px;
     right: 40px;

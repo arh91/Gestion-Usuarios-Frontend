@@ -22,7 +22,26 @@
         <div *ngIf="registroForm.get('password')?.invalid && registroForm.get('password')?.touched">
           Introduzca una contraseña.
         </div>
+        <div *ngIf="registroForm.get('password')?.errors && registroForm.get('password')?.touched">
+          <div *ngIf="registroForm.get('password')?.errors?.['minLength']">
+            {{ registroForm.get('password')?.errors?.['minLength'] }}
+          </div>
+          <div *ngIf="registroForm.get('password')?.errors?.['mayuscula']">
+            {{ registroForm.get('password')?.errors?.['mayuscula'] }}
+          </div>
+          <div *ngIf="registroForm.get('password')?.errors?.['minuscula']">
+            {{ registroForm.get('password')?.errors?.['minuscula'] }}
+          </div>
+          <div *ngIf="registroForm.get('password')?.errors?.['dosNumeros']">
+            {{ registroForm.get('password')?.errors?.['dosNumeros'] }}
+          </div>
+          <div *ngIf="registroForm.get('password')?.errors?.['caracterEspecial']">
+            {{ registroForm.get('password')?.errors?.['caracterEspecial'] }}
+          </div>
+        </div>
       </div>
+
+
       <div id="input-container">
         <label for="mail">Mail:</label>
         <input type="text" id="mail" name="mail" formControlName="mail" required>

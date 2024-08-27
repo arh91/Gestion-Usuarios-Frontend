@@ -24,7 +24,7 @@ export class RegistroUsuarioComponent implements OnInit {
     // Crear el formulario en el método ngOnInit()
     this.registroForm = this.formBuilder.group({
       nick: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', Validators.required, Validators.minLength(8), this.validarContrasenha],
       mail: ['', Validators.required],
       telefono: ['', Validators.required]
     });
@@ -75,6 +75,30 @@ export class RegistroUsuarioComponent implements OnInit {
       // Manejar errores de validación de nick
       console.error('Error al validar nick:', error);
     });
+  }
+
+
+  validarContrasenha(control: any) {
+    const password = control.value;
+    const errors: any = {};
+
+    if (password.length < 8) {
+      errors.minLength = 'La contraseña debe tener al menos 8 caracteres.';
+    }
+    if (!/[A-Z]/.test(password)) {
+      errors.mayuscula = 'Debe tener al menos una letra mayúscula.';
+    }
+    if (!/[a-z]/.test(password)) {
+      errors.minuscula = 'Debe tener al menos una letra minúscula.';
+    }
+    if (!/\d.*\d/.test(password)) {
+      errors.dosNumeros = 'Debe tener al menos dos números.';
+    }
+    if (!/[@$!%*?&#]/.test(password)) {
+      errors.caracterEspecial = 'Debe tener al menos un carácter especial.';
+    }
+
+    return Object.keys(errors).length ? errors : null;
   }
 
   cambiarVisibilidadContrasenha(): void {
