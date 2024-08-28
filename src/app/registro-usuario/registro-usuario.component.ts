@@ -15,8 +15,7 @@ export class RegistroUsuarioComponent implements OnInit {
   registroForm: FormGroup; 
   passwordFieldType: string = "password";
   nickExists: boolean = false;
-  requisitosCumplidos: boolean = false;
-
+  
   constructor(private usuarioService: UsuarioService, private formBuilder: FormBuilder, private cdRef: ChangeDetectorRef) {
     this.registroForm = new FormGroup({});
   }
@@ -25,7 +24,7 @@ export class RegistroUsuarioComponent implements OnInit {
     // Crear el formulario en el método ngOnInit()
     this.registroForm = this.formBuilder.group({
       nick: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(8), this.validarContrasenha]],
+      password: ['', Validators.required],
       mail: ['', Validators.required],
       telefono: ['', Validators.required]
     });
@@ -38,7 +37,12 @@ export class RegistroUsuarioComponent implements OnInit {
       alert('Por favor, rellene todos los campos.');
       this.marcarTodosLosCamposComoTocados();
       return;
-    }    
+    }  
+    // Verificamos que la contraseña introducida cumpla con los requisitos establecidos
+    if (!this.validarPassword(this.registroForm.value.password)) {
+      alert('Contraseña incorrecta.')
+      return;
+    }  
 
     this.usuario.nick = this.registroForm.get('nick')?.value;
     this.usuario.password = this.registroForm.get('password')?.value;
@@ -50,11 +54,6 @@ export class RegistroUsuarioComponent implements OnInit {
       alert("El nick no debe contener más de 50 caracteres");
       return;
     }
-    /*this.validarContrasenha(this.usuario.password);
-    if (!this.requisitosCumplidos){
-      alert('La contraseña introducida no es válida');
-      return;
-    }*/
     this.usuarioService.validarNick(this.usuario.nick).subscribe(exists => {
       if (exists) {
         alert('El nick ya existe. Por favor, elige otro.');
@@ -83,28 +82,11 @@ export class RegistroUsuarioComponent implements OnInit {
   }
 
 
-  validarContrasenha(control: any) {
-    const password = control.value;
-    const errors: any = {};
-
-    if (password.length < 8) {
-      errors.minLength = '- Como mínimo 8 caracteres,';
-    }
-    if (!/[A-Z]/.test(password)) {
-      errors.mayuscula = '- Una letra mayúscula.';
-    }
-    if (!/[a-z]/.test(password)) {
-      errors.minuscula = '- Una letra minúscula.';
-    }
-    if (!/\d.*\d/.test(password)) {
-      errors.dosNumeros = '- Al menos dos números.';
-    }
-    if (!/[@$!%*?&#]/.test(password)) {
-      errors.caracterEspecial = '- Al menos un carácter especial.';
-    }
-
-    return Object.keys(errors).length ? errors : null;
+  validarPassword(password: string): boolean {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d{2,})(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
   }
+
 
   cambiarVisibilidadContrasenha(): void {
     console.log("Método cambiar tipo de dato");
