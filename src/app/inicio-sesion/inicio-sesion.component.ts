@@ -50,7 +50,13 @@ export class InicioSesionComponent {
         }
       },
       error => {
-        alert('Error al iniciar sesión');
+        if (error.status === 401) {
+          // Si el backend devuelve 401, mostramos "Credenciales incorrectas"
+          alert('Credenciales incorrectas');
+        } else {
+          // Para otros tipos de errores, mostramos el mensaje genérico
+          alert('Error al iniciar sesión');
+        }
       }
     );
   }
