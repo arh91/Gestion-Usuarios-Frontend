@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Usuario } from '../../models/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { ChangeDetectorRef } from '@angular/core';
@@ -43,6 +43,14 @@ export class RegistroUsuarioComponent implements OnInit {
       alert('Contraseña incorrecta.')
       return;
     }  
+    if (!this.validarCorreo(this.registroForm.value.mail)) {
+      alert('Sólamente puede registrar direcciones acabadas en @hotmail.com, @outlook.com, @gmail.com o @yahoo.com.')
+      return;
+    }
+    if (!this.validarTelefono(this.registroForm.value.telefono)) {
+      alert('Número de teléfono no válido');
+      return;
+    }
 
     this.usuario.nick = this.registroForm.get('nick')?.value;
     this.usuario.password = this.registroForm.get('password')?.value;
@@ -85,6 +93,19 @@ export class RegistroUsuarioComponent implements OnInit {
   validarPassword(password: string): boolean {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d{2,})(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return regex.test(password);
+  }
+
+
+  validarCorreo(email: string): boolean {
+    const dominiosPermitidos = ['@gmail.com', '@hotmail.com', '@outlook.com', '@yahoo.com'];
+    return dominiosPermitidos.some(dominio => email.endsWith(dominio));
+  }
+
+  validarTelefono(telefono: number): boolean {
+    const regex = /^[6789]\d{8}$/;
+    const telefonoStr = telefono.toString();  // Convertir a cadena para aplicar la expresión regular
+  
+    return regex.test(telefonoStr);
   }
 
 

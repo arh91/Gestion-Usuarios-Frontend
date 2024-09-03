@@ -69,6 +69,10 @@ export class SesionIniciadaComponent {
     }
   }
 
+  modificarCuenta(): void {
+    this.router.navigate(['/modificar-datos-usuario']);
+  }
+
   cerrarSesion() {
     this.ngOnInit();
     console.log(this.nick);
