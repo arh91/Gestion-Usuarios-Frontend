@@ -15,6 +15,8 @@ export class ModificarDatosUsuarioComponent implements OnInit {
   nickUsuario: string = localStorage.getItem('nickUsuario') || '';
   passwordFieldType: string = "password";
   IntroducePassword: boolean = false;
+  newPassword: boolean = false;
+  newPasswordTwo: boolean = false;
   btnOk: boolean = false;
 
   constructor(

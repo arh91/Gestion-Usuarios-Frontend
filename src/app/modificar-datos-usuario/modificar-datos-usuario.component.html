@@ -18,6 +18,25 @@
         <p style="width:300px;">La contraseña debe tener al menos 8 dígitos, una mayúscula, una minúscula, dos números y un caracter especial.</p>
       </div>
 
+      <!-- <div id="input-container"> -->
+        <div *ngIf="newPassword" id="newPassword">
+          <p>Introduzca la nueva contraseña:</p>
+          <input [type]="passwordFieldType" id="password" name="password" formControlName="newPassword" required>
+          <button type="button" (click)="cambiarVisibilidadContrasenha()" id="vista" name="vista">
+            {{passwordFieldType === "password" ? "Ver" : "Ocultar"}}
+          </button>
+          <button type="button">OK</button>
+        </div>
+        <div *ngIf="newPasswordTwo" id="newPasswordTwo">
+          <p>Introduzca la contraseña de nuevo:</p>
+          <input [type]="passwordFieldType" id="password" name="password" formControlName="newPassword" required>
+          <button type="button" (click)="cambiarVisibilidadContrasenha()" id="vista" name="vista">
+            {{passwordFieldType === "password" ? "Ver" : "Ocultar"}}
+          </button>
+          <button type="button">OK</button>
+        </div>
+      <!-- </div> -->
+
       <div id="input-container">
         <label for="mail">Mail:</label>
         <input type="text" id="mail" name="mail" formControlName="mail" required>

@@ -23,6 +23,22 @@
     align-items: center;
     gap: 50px;
   }
+
+  #newPassword {
+    margin-left: 430px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 40px;
+  }
+
+  #newPasswordTwo {
+    margin-left: 430px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 40px;
+  }
   
   
   #input-container label {
