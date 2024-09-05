@@ -14,6 +14,8 @@ export class ModificarDatosUsuarioComponent implements OnInit {
   modificarForm!: FormGroup;
   nickUsuario: string = localStorage.getItem('nickUsuario') || '';
   passwordFieldType: string = "password";
+  IntroducePassword: boolean = false;
+  btnOk: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,7 +42,7 @@ export class ModificarDatosUsuarioComponent implements OnInit {
         this.usuario = usuario;
       // Inicializar el formulario con los datos del usuario
       this.modificarForm = this.formBuilder.group({
-        password: [usuario.password, Validators.required],
+        password: ['', Validators.required],
         mail: [usuario.mail, Validators.required],
         telefono: [usuario.telefono, Validators.required]
       });
@@ -70,7 +72,8 @@ export class ModificarDatosUsuarioComponent implements OnInit {
       return;
     }
 
-
+    // Permitir que el usuario deje la contraseña en blanco si no quiere cambiarla
+    const newPassword = this.modificarForm.value.password || this.usuario.password;
 
     const confirmacion = confirm('¿Está seguro de que desea modificar sus datos?');
     if (confirmacion) {
@@ -87,7 +90,7 @@ export class ModificarDatosUsuarioComponent implements OnInit {
 
         const usuarioModificado = {
           nick: this.usuario.nick,
-          password: String(this.modificarForm.value.password),
+          password: newPassword,
           mail: String(this.modificarForm.value.mail),
           telefono: Number(this.modificarForm.value.telefono),
           fechaRegistro: this.usuario.fechaRegistro,
@@ -126,6 +129,25 @@ export class ModificarDatosUsuarioComponent implements OnInit {
   
     return regex.test(telefonoStr);
   }
+
+
+  mostrarElementos(){
+    this.mostrarMensaje();
+    this.mostrarBoton();
+  }
+  
+  mostrarMensaje(){
+    this.IntroducePassword = true;
+  }
+
+  mostrarBoton(){
+    this.btnOk = true;
+  }
+
+
+  /*autenticarPassword(nick: string, password: string): boolean {
+
+  }*/
 
 
   cambiarVisibilidadContrasenha(): void {

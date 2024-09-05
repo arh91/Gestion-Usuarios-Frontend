@@ -16,6 +16,13 @@
     gap: 50px;
     margin-bottom:40px;
   }
+
+  #btnChangePassword {
+    margin-left:430px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+  }
   
   
   #input-container label {

@@ -2,8 +2,13 @@
     <div class="header">
       <h2>Modificación de datos</h2>
     </div>
-
+    
     <div class="form-container">
+      <div id="btnChangePassword">
+        <button type="button" (click)="mostrarElementos()" style="height:40px">Cambiar contraseña</button>
+        <p *ngIf="IntroducePassword">Introduzca la contraseña actual</p>
+        <button *ngIf="btnOk" type="button">OK</button>
+      </div>
       <div id="input-container">
         <label for="password">Contraseña:</label>
         <input [type]="passwordFieldType" id="password" name="password" formControlName="password" required>
