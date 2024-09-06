@@ -22,6 +22,12 @@ export class ModificarDatosUsuarioComponent implements OnInit {
   newPasswordTwo: boolean = false;
   btnOk: boolean = false;
   passwordsIguales: boolean = true;
+  oldPwd: string = '';
+  newPwd: string = '';
+  oldMail: string = '';
+  newMail: string = '';
+  oldPhone: number = 0;
+  newPhone: number = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -56,12 +62,17 @@ export class ModificarDatosUsuarioComponent implements OnInit {
         telefono: [usuario.telefono, Validators.required]
       });
       console.log(usuario.mail);
+      this.oldMail = this.modificarForm.value.mail;
+      this.oldPhone = this.modificarForm.value.telefono;
       });
     }
   }
   
 
   modificarUsuario(): void {
+    this.newMail=this.modificarForm.value.mail;
+    this.newPhone=this.modificarForm.value.telefono;
+
     if (!this.modificarForm.value.mail.trim() || this.modificarForm.value.telefono == null) {
       alert('Por favor, rellene todos los datos');
       return;
@@ -72,6 +83,10 @@ export class ModificarDatosUsuarioComponent implements OnInit {
     }
     if (!this.validarTelefono(this.modificarForm.value.telefono)) {
       alert('Número de teléfono no válido');
+      return;
+    }
+    if(this.oldMail==this.newMail && this.oldPhone==this.newPhone){
+      alert('No se ha modificado ningún dato');
       return;
     }
 
@@ -109,7 +124,12 @@ export class ModificarDatosUsuarioComponent implements OnInit {
       return;
     }
     if (!this.validarPassword(this.modificarForm.value.newPassword)) {
-      alert('Contraseña no válida.')
+      alert('Contraseña no válida.');
+      return;
+    }
+    this.newPwd=this.modificarForm.value.newPassword;
+    if(this.oldPwd==this.newPwd) {
+      alert('La contraseña que ha escrito es la misma que ya tenía antes.');
       return;
     }
     this.mostrarNewPasswordTwo();
@@ -198,6 +218,7 @@ export class ModificarDatosUsuarioComponent implements OnInit {
       usuario => {
         if (usuario) {
           this.mostrarNewPassword();
+          this.oldPwd=this.modificarForm.value.password;
         } else {
           alert('La contraseña no es correcta');
         }
