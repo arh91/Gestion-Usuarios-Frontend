@@ -12,12 +12,16 @@ import { Usuario } from '../../models/usuario';
 export class ModificarDatosUsuarioComponent implements OnInit {
   usuario!: Usuario;
   modificarForm!: FormGroup;
+  modificarFormTwo!: FormGroup;
   nickUsuario: string = localStorage.getItem('nickUsuario') || '';
+  password: string = '';
   passwordFieldType: string = "password";
   IntroducePassword: boolean = false;
+  oldPassword: boolean = false;
   newPassword: boolean = false;
   newPasswordTwo: boolean = false;
   btnOk: boolean = false;
+  passwordsIguales: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,47 +32,44 @@ export class ModificarDatosUsuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /*this.modificarForm = this.formBuilder.group({
-      password: ['', Validators.required],
-      mail: ['', [Validators.required, Validators.email]],
-      telefono: ['', Validators.required]
-    });*/
+      this.modificarForm = this.formBuilder.group({
+        password: ['', Validators.required],
+        newPassword: ['', Validators.required],
+        newPasswordTwo: ['', Validators.required], 
+        mail: ['', Validators.required],
+        telefono: ['', Validators.required]
+      });
 
     this.cargarDatosUsuario();
   }
 
   cargarDatosUsuario(): void {
-    //const nick = this.route.snapshot.paramMap.get('nick')!;
     if (this.nickUsuario) {
       this.usuarioService.obtenerUsuarioPorId(this.nickUsuario).subscribe((usuario: Usuario) => {
         this.usuario = usuario;
       // Inicializar el formulario con los datos del usuario
       this.modificarForm = this.formBuilder.group({
         password: ['', Validators.required],
+        newPassword: ['', Validators.required],
+        newPasswordTwo: ['', Validators.required], 
         mail: [usuario.mail, Validators.required],
         telefono: [usuario.telefono, Validators.required]
       });
+      console.log(usuario.mail);
       });
     }
   }
   
 
   modificarUsuario(): void {
-    if (this.modificarForm.invalid) {
+    if (!this.modificarForm.value.mail.trim() || this.modificarForm.value.telefono == null) {
+      alert('Por favor, rellene todos los datos');
       return;
-    }
-
-    // Verificamos que la contraseña introducida cumpla con los requisitos establecidos
-    if (!this.validarPassword(this.modificarForm.value.password)) {
-      alert('Contraseña no válida.')
-      return;
-    }
-    
+    }  
     if (!this.validarCorreo(this.modificarForm.value.mail)) {
       alert('Sólamente puede registrar direcciones acabadas en @hotmail.com, @outlook.com, @gmail.com o @yahoo.com.')
       return;
     }
-
     if (!this.validarTelefono(this.modificarForm.value.telefono)) {
       alert('Número de teléfono no válido');
       return;
@@ -79,17 +80,6 @@ export class ModificarDatosUsuarioComponent implements OnInit {
 
     const confirmacion = confirm('¿Está seguro de que desea modificar sus datos?');
     if (confirmacion) {
-      
-       /*  password: this.modificarForm.value.password;
-        mail: this.modificarForm.value.mail;
-        telefono: this.modificarForm.value.telefono; 
-
-        let passwordString: string = "";
-        let mailString: string = "";
-        let telefonoNumber: number = 0;*/
-
-        //let nickUsuario: string = localStorage.getItem('nickUsuario') || '';
-
         const usuarioModificado = {
           nick: this.usuario.nick,
           password: newPassword,
@@ -112,6 +102,55 @@ export class ModificarDatosUsuarioComponent implements OnInit {
     }
   }
 
+  escribirNuevaContrasenha(): void{
+    console.log(this.modificarForm.value.newPassword);
+    if (!this.modificarForm.value.newPassword.trim()) {
+      alert('Por favor, rellene la contraseña.');
+      return;
+    }
+    if (!this.validarPassword(this.modificarForm.value.newPassword)) {
+      alert('Contraseña no válida.')
+      return;
+    }
+    this.mostrarNewPasswordTwo();
+  }
+
+  repetirNuevaContrasenha(): void{
+    const password = this.modificarForm.get('newPassword')?.value;
+    const confirmPassword = this.modificarForm.get('newPasswordTwo')?.value;
+    this.passwordsIguales = password === confirmPassword;
+
+    if (!this.modificarForm.value.newPasswordTwo.trim()) {
+      alert('Por favor, rellene la contraseña.');
+      return;
+    }
+    if (!this.passwordsIguales) {
+      alert('Las contraseñas no coinciden');
+    } else {
+      const newPassword = this.modificarForm.value.newPassword;
+
+    const confirmacion = confirm('¿Está seguro de que desea modificar la contraseña?');
+    if (confirmacion) {
+        const usuarioModificado = {
+          nick: this.usuario.nick,
+          password: newPassword,
+          mail: String(this.modificarForm.value.mail),
+          telefono: Number(this.modificarForm.value.telefono),
+          fechaRegistro: this.usuario.fechaRegistro,
+          conectado: this.usuario.conectado
+        };
+
+        this.usuarioService.modificarUsuario(this.nickUsuario, usuarioModificado).subscribe(
+          () => {
+            alert('Contraseña modificada correctamente');
+            this.router.navigate(['/sesion-iniciada']);
+          },
+          error => {
+            alert('Hubo un error al modificar la contraseña');
+          }
+        );
+    }}
+  }
 
   validarPassword(password: string): boolean {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d{2,})(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -134,22 +173,46 @@ export class ModificarDatosUsuarioComponent implements OnInit {
 
 
   mostrarElementos(){
-    this.mostrarMensaje();
-    this.mostrarBoton();
+    this.IntroducePassword = true;
+    this.btnOk = true;
+    this.oldPassword = true;
   }
   
-  mostrarMensaje(){
-    this.IntroducePassword = true;
+
+  mostrarNewPassword(){
+    this.newPassword = true;
   }
 
-  mostrarBoton(){
-    this.btnOk = true;
+  mostrarNewPasswordTwo(){
+    this.newPasswordTwo = true;
   }
 
 
-  /*autenticarPassword(nick: string, password: string): boolean {
-
-  }*/
+  autenticarPassword(): void {
+    this.password = this.modificarForm.get('password')?.value;
+    if (!this.modificarForm.value.password.trim()) {
+      alert('Por favor, rellene la contraseña.');
+      return;
+    }
+    this.usuarioService.autenticarUsuario(this.nickUsuario, this.password).subscribe(
+      usuario => {
+        if (usuario) {
+          this.mostrarNewPassword();
+        } else {
+          alert('La contraseña no es correcta');
+        }
+      },
+      error => {
+        if (error.status === 401) {
+          // Si el backend devuelve 401, mostramos "La contraseña no es correcta"
+          alert('La contraseña no es correcta');
+        } else {
+          // Para otros tipos de errores, mostramos el mensaje genérico
+          alert('Error al validar contraseña');
+        }
+      }
+    );
+  }
 
 
   cambiarVisibilidadContrasenha(): void {

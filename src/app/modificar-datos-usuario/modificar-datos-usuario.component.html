@@ -6,10 +6,10 @@
     <div class="form-container">
       <div id="btnChangePassword">
         <button type="button" (click)="mostrarElementos()" style="height:40px">Cambiar contraseña</button>
-        <p *ngIf="IntroducePassword">Introduzca la contraseña actual</p>
-        <button *ngIf="btnOk" type="button">OK</button>
+        <p *ngIf="IntroducePassword">Introduzca la contraseña actual y pulse OK:</p>
+        <button *ngIf="btnOk" type="button" (click)="autenticarPassword()">OK</button>
       </div>
-      <div id="input-container">
+      <div *ngIf="oldPassword" id="input-container">
         <label for="password">Contraseña:</label>
         <input [type]="passwordFieldType" id="password" name="password" formControlName="password" required>
         <button type="button" (click)="cambiarVisibilidadContrasenha()" id="vista" name="vista">
@@ -20,20 +20,20 @@
 
       <!-- <div id="input-container"> -->
         <div *ngIf="newPassword" id="newPassword">
-          <p>Introduzca la nueva contraseña:</p>
-          <input [type]="passwordFieldType" id="password" name="password" formControlName="newPassword" required>
-          <button type="button" (click)="cambiarVisibilidadContrasenha()" id="vista" name="vista">
-            {{passwordFieldType === "password" ? "Ver" : "Ocultar"}}
+          <p>Introduzca la nueva contraseña y pulse OK:</p>
+          <input [type]="passwordFieldType" id="newPasswordInput" name="newPasswordInput" formControlName="newPassword" required>
+          <button type="button" (click)="cambiarVisibilidadContrasenha()" id="vistaNewPassword" name="vistaNewPassword">
+            {{passwordFieldType === "newPasswordInput" ? "Ver" : "Ocultar"}}
           </button>
-          <button type="button">OK</button>
+          <button type="button" (click)="escribirNuevaContrasenha()">OK</button>
         </div>
         <div *ngIf="newPasswordTwo" id="newPasswordTwo">
-          <p>Introduzca la contraseña de nuevo:</p>
-          <input [type]="passwordFieldType" id="password" name="password" formControlName="newPassword" required>
-          <button type="button" (click)="cambiarVisibilidadContrasenha()" id="vista" name="vista">
-            {{passwordFieldType === "password" ? "Ver" : "Ocultar"}}
+          <p>Repita la nueva contraseña y pulse OK:</p>
+          <input [type]="passwordFieldType" id="newPasswordTwoInput" name="newPasswordTwoInput" formControlName="newPasswordTwo" required>
+          <button type="button" (click)="cambiarVisibilidadContrasenha()" id="vistaNewPasswordTwo" name="vistaNewPasswordTwo">
+            {{passwordFieldType === "newPasswordTwoInput" ? "Ver" : "Ocultar"}}
           </button>
-          <button type="button">OK</button>
+          <button type="button" (click)="repetirNuevaContrasenha()">OK</button>
         </div>
       <!-- </div> -->
 
