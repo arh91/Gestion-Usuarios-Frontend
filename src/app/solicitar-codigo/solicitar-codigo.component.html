@@ -1,0 +1,15 @@
+<form [formGroup]="applyCodeForm" #captchaForm="ngForm">
+  <div class="header">
+    <h2>Recuperación de cuenta de usuario (1/2)</h2>
+  </div>
+  <div class="form-container">
+    <div id="input-container">
+      <p>Introduzca aquí el código que hemos enviado a su email:</p>
+      <input type="text" formControlName="codigoIntroducido" name="codigoIntroducido" required />
+    </div>
+  </div>
+  <div class="button-container">
+    <button (click)="verificarCodigo()">OK</button>
+  </div>  
+</form>
+  

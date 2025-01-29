@@ -14,6 +14,10 @@ import { DatosUsuarioComponent } from './datos-usuario/datos-usuario.component';
 import { InactivityService } from '../services/inactivity.service';
 import { ModificarDatosUsuarioComponent } from './modificar-datos-usuario/modificar-datos-usuario.component';
 import { PantallaInicialComponent } from './pantalla-inicial/pantalla-inicial.component';
+import { SolicitarCodigoComponent } from './solicitar-codigo/solicitar-codigo.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
+import { CuentaRecuperadaComponent } from './cuenta-recuperada/cuenta-recuperada.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +28,10 @@ import { PantallaInicialComponent } from './pantalla-inicial/pantalla-inicial.co
     ListaUsuariosComponent,
     DatosUsuarioComponent,
     ModificarDatosUsuarioComponent,
-    PantallaInicialComponent
+    PantallaInicialComponent, 
+    SolicitarCodigoComponent, 
+    UpdatePasswordComponent,
+    CuentaRecuperadaComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { Usuario } from '../../models/usuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { InactivityService } from '../../services/inactivity.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -59,6 +60,50 @@ export class InicioSesionComponent {
         }
       }
     );
+  }
+
+  solicitarCodigo(event: Event): void{
+    event.preventDefault();
+    const nickControl = this.loginForm.get('nick');
+
+    if (nickControl?.value) {
+      // Si el campo 'nick' tiene un valor, redirige al usuario
+      console.log('Nick introducido:', nickControl.value);
+    } else {
+      // Si el campo 'nick' está vacío, muestra un mensaje de error
+      alert('Por favor, rellena el campo Nickname antes de continuar.');
+      return;
+    }
+    this.nick = this.loginForm.get('nick')?.value;
+
+    this.usuarioService.validarNick(this.nick).subscribe(exists => {
+      if (exists) {
+        localStorage.setItem('nickUsuario', this.nick);
+        this.router.navigate(['/solicitar-codigo']);
+        this.usuarioService.enviarCodigoVerificacion(this.nick).subscribe(
+          (response) => {
+            if (response.status === 201) {
+              alert('Se ha enviado un mail con un código secreto a tu cuenta de correo.');
+            }
+          },
+          (error: HttpErrorResponse) => {
+            // Manejo de errores
+            // Maneja el caso en que Angular interpreta una respuesta status 201 como un error
+            if (error.status === 201) {
+              alert('Se ha enviado un mail con un código secreto a tu cuenta de correo.');
+            } else {
+              console.error('Error al enviar código:', error);
+              alert('Error al enviar código');
+            }
+          }
+        );
+      } else {
+        alert ("Error: el nick introducido no existe en la base de datos.");
+      }
+    }, error => {
+      // Manejar errores de validación de nick
+      console.error('Error al validar nick:', error);
+    });
   }
 
   cambiarVisibilidadContrasenha(): void {

@@ -1,0 +1,10 @@
+<div class="header">
+    <h1>Recuperación de cuenta exitosa!</h1>
+</div>
+<div class="body" *ngIf="nick">
+    <p style="margin-top:100px">Enhorabuena {{ nick }}, tu cuenta ha sido recuperada con éxito, con la nueva contraseña que has elegido.</p><br>
+    <p>Para acceder a tu cuenta, haz click en el botón "Ir a mi cuenta".</p>
+</div>
+<div class="button">
+    <button id="btnIr" type="button" (click)="accederCuenta()" style="width:130px">Ir a mi cuenta</button>
+</div>

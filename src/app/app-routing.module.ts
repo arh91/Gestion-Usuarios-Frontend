@@ -7,6 +7,9 @@ import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.componen
 import { DatosUsuarioComponent } from './datos-usuario/datos-usuario.component';
 import { ModificarDatosUsuarioComponent } from './modificar-datos-usuario/modificar-datos-usuario.component';
 import { PantallaInicialComponent } from './pantalla-inicial/pantalla-inicial.component';
+import { SolicitarCodigoComponent } from './solicitar-codigo/solicitar-codigo.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
+import { CuentaRecuperadaComponent } from './cuenta-recuperada/cuenta-recuperada.component';
 
 
 const routes: Routes = [
@@ -16,7 +19,10 @@ const routes: Routes = [
   { path: 'sesion-iniciada', component: SesionIniciadaComponent },
   { path: 'lista-usuarios', component: ListaUsuariosComponent },
   { path: 'datos-usuario/:nick', component: DatosUsuarioComponent },
-  { path: 'modificar-datos-usuario', component: ModificarDatosUsuarioComponent }
+  { path: 'modificar-datos-usuario', component: ModificarDatosUsuarioComponent },
+  { path: 'solicitar-codigo', component: SolicitarCodigoComponent },
+  { path: 'actualizar-contraseña', component: UpdatePasswordComponent },
+  { path: 'cuenta-recuperada', component: CuentaRecuperadaComponent }
 ];
 
 @NgModule({

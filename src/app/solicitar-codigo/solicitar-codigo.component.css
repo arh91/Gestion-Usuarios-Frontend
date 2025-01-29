@@ -1,0 +1,35 @@
+  .header{
+    margin-bottom:50px;
+  }
+  
+  .form-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  #input-container{
+    margin-left:430px;
+    display: flex;
+    flex-direction: space-between;  /* Alinear contenido verticalmente dentro del div */
+    gap: 50px;
+    margin-bottom:40px;
+  }
+  
+  #input-container label {
+    width: 100px;            /* Ancho fijo para los labels */
+    text-align: right;       /* Alinear texto de los labels a la derecha */
+  }
+    
+  #input-container input {
+    width: 380px;            /* Ancho de los inputs */
+    height: 20px;
+  }
+  
+  .button-container{
+    margin-top: 30px;
+    margin-left:200px;
+    display: flex;  
+    gap: 100px;
+    padding-left: 300px;
+  }
