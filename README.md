@@ -35,6 +35,17 @@ To run this project, you need to have the following installed:
 git clone https://github.com/arh91/Gestion-Usuarios-Frontend.git
 ```
 
+## Run the application
+
+To start the Angular application, go to root directory and run:
+```sh
+npm start
+```
+
+## Access the Application
+Once frontend are running, open your browser and navigate to http://localhost:4200 to access main interface app.
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
