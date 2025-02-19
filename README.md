@@ -65,6 +65,8 @@ Once the application is running, you can access the following features:
 - Delete User: Delete a user from the system by clicking the delete button associated with the user.
 
 
+## Author
+
 👤 **arh91**
 
 
